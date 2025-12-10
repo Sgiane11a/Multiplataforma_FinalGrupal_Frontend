@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/libro_provider.dart';
+import '../providers/autor_provider.dart';
+import '../providers/editorial_provider.dart';
 import 'libros_screen.dart';
 import 'autores_screen.dart';
 import 'editoriales_screen.dart';
@@ -30,6 +34,28 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color(0xFF2E7D32),
         elevation: 0,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: () {
+              // Forzar refresh de todos los datos
+              context.read<LibroProvider>().loadLibros(forceRefresh: true);
+              context.read<AutorProvider>().loadAutores(forceRefresh: true);
+              context.read<EditorialProvider>().loadEditoriales(
+                forceRefresh: true,
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Actualizando datos...'),
+                  duration: Duration(seconds: 1),
+                  backgroundColor: Color(0xFF2E7D32),
+                ),
+              );
+            },
+            tooltip: 'Actualizar datos',
+          ),
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(

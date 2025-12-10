@@ -5,7 +5,8 @@ import '../models/autor.dart';
 import '../models/editorial.dart';
 
 class ApiService {
-  static const String baseUrl = 'https://multiplataforma-finalgrupal.onrender.com/api';
+  static const String baseUrl =
+      'https://multiplataforma-finalgrupal.onrender.com/api';
 
   // Timeout más largo para servicios como Render que pueden estar "dormidos"
   static const Duration timeoutDuration = Duration(seconds: 30);
